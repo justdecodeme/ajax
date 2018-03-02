@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js ajax</title>
+</head>
+<body>
+	<button id="btn1">js GET</button> 
+	<div id="output1"></div>
+
+	<button id="btn2">js POST</button> 
+	<div id="output2"></div>
+
+	<button id="btn3">jQuery $.post() Method</button> 
+	<div id="output3"></div>
+
+	<button id="btn4">jQuery $.ajax() Method - get</button> 
+	<div id="output4"></div>
+
+	<button id="btn5">jQuery $.ajax() Method - post</button> 
+	<input type="text" value="default value" id="info">
+	<div id="output5"></div>
+
+	<script>
+		/**************************/
+		//	GET
+		/**************************/
+
+		document.getElementById('btn1').onclick = function () {
+		  var xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+		  	// When readyState is 4 and status is 200, the response is ready.
+		    if (this.readyState == 4 && this.status == 200) {
+		     document.getElementById("output1").innerHTML = this.responseText;
+		    }
+		  };
+		  // To send a request to a server, we use the open() and send() methods
+		  xhttp.open("GET", "demo.txt", true);  // open(method, url, async)
+		  xhttp.send();
+		}
+
+
+		/**************************/
+		//	POST
+		/**************************/
+
+		document.getElementById('btn2').onclick = function () {
+		  var xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		     document.getElementById("output2").innerHTML = this.responseText;
+		    }
+		  };
+		  xhttp.open("POST", "demo3.php", true);
+		  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		  xhttp.send("name=Rakko&city=Bangalore");		}
+	</script>
+</body>
+</html>
