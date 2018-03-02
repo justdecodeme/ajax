@@ -7,9 +7,16 @@
 </head>
 <body>
 	<h1>jQuery</h1>
-	<button id="btn1">Get External Content</button> 
+	<button id="btn1">jQuery load() Method</button> 
 	<div id="output1a"></div>
 	<div id="output1b"></div>
+
+	<button id="btn2">jQuery $.get() Method</button> 
+	<div id="output2"></div>
+
+	<button id="btn3">jQuery $.post() Method</button> 
+	<div id="output3"></div>
+
 	<script>
 		$(function() {
 			/**************************/
@@ -23,8 +30,12 @@
 			// The required URL parameter specifies the URL you wish to load.
 			// The optional data parameter specifies a set of querystring key/value pairs to send along with the request.
 			// The optional callback parameter is the name of a function to be executed after the load() method is completed.
-			
-			$("button").click(function(){
+			// The callback function can have different parameters:
+			// responseTxt - contains the resulting content if the call succeeds
+			// statusTxt - contains the status of the call
+			// xhr - contains the XMLHttpRequest object
+
+			$("#btn1").click(function(){
 			    $("#output1a").load("demo.txt");
 
 			    $("#output1b").load("demo.txt #p1", function(responseTxt, statusTxt, xhr){
@@ -33,6 +44,42 @@
 			        if(statusTxt == "error")
 			            console.log("Error: " + xhr.status + ": " + xhr.statusText);
 			    });			    
+			});			
+
+
+			/**************************/
+			//	jQuery $.get() Method
+			/**************************/
+
+			// $.get(URL,callback);
+
+			// The $.get() method requests data from the server with an HTTP GET request.
+			// GET is basically used for just getting (retrieving) some data from the server. Note: The GET method may return cached data.
+			// data - holds the content of the page requested
+			// status - holds the status of the request
+
+			$("#btn2").click(function(){
+				$.get("demo2.php", function(data, status){
+				    $('#output2').html("Data: " + data + "<br>Status: " + status);
+				});			    
+			});			
+
+
+			/**************************/
+			//	jQuery $.post() Method
+			/**************************/
+
+			// $.post(URL,data,callback);
+
+			// The $.post() method requests data from the server using an HTTP POST request.
+			// POST can also be used to get some data from the server. However, the POST method NEVER caches data, and is often used to send data along with the request.
+			// The required URL parameter specifies the URL you wish to request.
+			// The optional data parameter specifies some data to send along with the request.
+			// The optional callback parameter is the name of a function to be executed if the request succeeds.			
+			$("#btn3").click(function(){
+				$.post("demo3.php", { name: "Rakko", city: "Bangalore" }, function(data, status) {
+				    $('#output3').html("Data: " + data + "<br>Status: " + status);
+				});			
 			});			
 		})
 	</script>
