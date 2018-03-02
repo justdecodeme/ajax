@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery ajax</title>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+	<h1>jQuery</h1>
+	<button id="btn1">Get External Content</button> 
+	<div id="output1a"></div>
+	<div id="output1b"></div>
+	<script>
+		$(function() {
+			/**************************/
+			//	jQuery load() Method
+			/**************************/
+
+			// $(selector).load(URL,data,callback);
+
+			// The jQuery load() method is a simple, but powerful AJAX method.
+			// The load() method loads data from a server and puts the returned data into the selected element.
+			// The required URL parameter specifies the URL you wish to load.
+			// The optional data parameter specifies a set of querystring key/value pairs to send along with the request.
+			// The optional callback parameter is the name of a function to be executed after the load() method is completed.
+			
+			$("button").click(function(){
+			    $("#output1a").load("demo.txt");
+
+			    $("#output1b").load("demo.txt #p1", function(responseTxt, statusTxt, xhr){
+			        if(statusTxt == "success")
+			            console.log("External content loaded successfully!");
+			        if(statusTxt == "error")
+			            console.log("Error: " + xhr.status + ": " + xhr.statusText);
+			    });			    
+			});			
+		})
+	</script>
+</body>
+</html>
