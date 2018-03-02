@@ -17,6 +17,13 @@
 	<button id="btn3">jQuery $.post() Method</button> 
 	<div id="output3"></div>
 
+	<button id="btn4">jQuery $.ajax() Method - get</button> 
+	<div id="output4"></div>
+
+	<button id="btn5">jQuery $.ajax() Method - post</button> 
+	<input type="text" value="default value" id="info">
+	<div id="output5"></div>
+
 	<script>
 		$(function() {
 			/**************************/
@@ -76,11 +83,63 @@
 			// The required URL parameter specifies the URL you wish to request.
 			// The optional data parameter specifies some data to send along with the request.
 			// The optional callback parameter is the name of a function to be executed if the request succeeds.			
+			
 			$("#btn3").click(function(){
 				$.post("demo3.php", { name: "Rakko", city: "Bangalore" }, function(data, status) {
 				    $('#output3').html("Data: " + data + "<br>Status: " + status);
 				});			
 			});			
+
+
+			/**************************/
+			//	jQuery $.ajax() Method
+			/**************************/
+
+			// $.ajax({name:value, name:value, ... })
+
+			// The ajax() method is used to perform an AJAX (asynchronous HTTP) request.
+
+			// All jQuery AJAX methods use the ajax() method. This method is mostly used for requests where the other methods cannot be used.
+
+			$("#btn4").click(function(){
+				$.ajax({
+					url: 'demo2.php',
+					dataType: 'json',
+					cache: false,
+					// username: 'rakko',
+					// password: '1234',
+					success: function(data, status) {
+						console.log(data);
+						$('#output4').text(data);
+						$.each(data, function(index) {
+							console.log(data[index]);
+						});
+					},
+					error: function(xhr, status, err) {
+						console.log(xhr);
+						console.log(status);
+						console.log(err);
+					}
+				});		
+			});			
+
+			$('#btn5').click(function(e) {
+				console.log('clicked');
+				$.ajax({
+					type: 'POST',
+					url: 'demo4.php',
+					data: 'value=' + $('#info').val(),
+					success: function(response) {
+						$('#output5').html(response);
+					},
+					error: function(xhr, status, err) {
+						console.log(xhr);
+						console.log(status);
+						console.log(err);
+					}
+				});
+			});
+
 		})
 	</script>
 </body>
