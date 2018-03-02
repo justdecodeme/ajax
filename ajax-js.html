@@ -9,18 +9,13 @@
 	<div id="output1"></div>
 
 	<button id="btn2">js POST</button> 
-	<div id="output2"></div>
+	<div id="output2"></div><br>
 
-	<button id="btn3">jQuery $.post() Method</button> 
-	<div id="output3"></div>
-
-	<button id="btn4">jQuery $.ajax() Method - get</button> 
-	<div id="output4"></div>
-
-	<button id="btn5">jQuery $.ajax() Method - post</button> 
-	<input type="text" value="default value" id="info">
-	<div id="output5"></div>
-
+	<p><b>Start typing a name in the input field below:</b></p>
+	<form> 
+	First name: <input type="text" onkeyup="showHint(this.value)">
+	</form>
+	<p>Suggestions: <span id="txtHint"></span></p>
 	<script>
 		/**************************/
 		//	GET
@@ -53,7 +48,29 @@
 		  };
 		  xhttp.open("POST", "demo3.php", true);
 		  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		  xhttp.send("name=Rakko&city=Bangalore");		}
+		  xhttp.send("name=Rakko&city=Bangalore");		
+		}
+
+
+		/**************************/
+		//	Show suggestions Example
+		/**************************/
+
+		function showHint(str) {
+		    if (str.length == 0) { 
+		        document.getElementById("txtHint").innerHTML = "";
+		        return;
+		    } else {
+		        var xmlhttp = new XMLHttpRequest();
+		        xmlhttp.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+		                document.getElementById("txtHint").innerHTML = this.responseText;
+		            }
+		        };
+		        xmlhttp.open("GET", "gethint.php?q=" + str, true);
+		        xmlhttp.send();
+		    }
+		}
 	</script>
 </body>
 </html>
