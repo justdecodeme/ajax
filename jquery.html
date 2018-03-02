@@ -101,7 +101,7 @@
 
 			// All jQuery AJAX methods use the ajax() method. This method is mostly used for requests where the other methods cannot be used.
 
-			$("#btn4").click(function(){
+			$("#btn4").click(function() {  // GET
 				$.ajax({
 					url: 'demo2.php',
 					dataType: 'json',
@@ -123,7 +123,7 @@
 				});		
 			});			
 
-			$('#btn5').click(function(e) {
+			$('#btn5').click(function(e) {  // POST
 				console.log('clicked');
 				$.ajax({
 					type: 'POST',
@@ -139,7 +139,6 @@
 					}
 				});
 			});
-
 		})
 	</script>
 </body>
